@@ -108,7 +108,7 @@ export function DashboardClient({ data }: { data: DashboardData }) {
 
           <div className="bg-white rounded-xl border border-border p-4 sm:p-5">
             <div className="flex items-center justify-between mb-4">
-              <h3 className="text-sm font-semibold text-foreground">Attivit\u00e0 recenti</h3>
+              <h3 className="text-sm font-semibold text-foreground">Attività recenti</h3>
               <Link href="/noleggi">
                 <Button variant="ghost" size="sm" className="text-xs">Vedi tutti</Button>
               </Link>

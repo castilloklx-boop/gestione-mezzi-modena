@@ -132,7 +132,7 @@ export function ClientiList({ clienti: initialData }: { clienti: Cliente[] }) {
             { key: "referente", label: "Referente", sortable: true },
             { key: "email", label: "Email", sortable: true, hideOnMobile: true },
             { key: "telefono", label: "Telefono", hideOnMobile: true },
-            { key: "citta", label: "Citt\u00e0", sortable: true, hideOnMobile: true },
+            { key: "citta", label: "Città", sortable: true, hideOnMobile: true },
             {
               key: "attivo",
               label: "Stato",
@@ -142,7 +142,7 @@ export function ClientiList({ clienti: initialData }: { clienti: Cliente[] }) {
             },
             {
               key: "_count",
-              label: "Attivit\u00e0",
+              label: "Attività",
               hideOnMobile: true,
               render: (c: Cliente) => (
                 <span className="text-xs text-secondary">

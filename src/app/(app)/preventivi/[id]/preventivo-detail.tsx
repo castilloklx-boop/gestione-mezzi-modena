@@ -151,7 +151,7 @@ export function PreventivoDetail({ preventivo }: { preventivo: PreventivoDetailD
                   <p className="text-sm">{formatDate(preventivo.dataCreazione)}</p>
                 </div>
                 <div>
-                  <p className="text-xs text-secondary mb-1">Validit\u00e0</p>
+                  <p className="text-xs text-secondary mb-1">Validità</p>
                   <p className="text-sm">{preventivo.validita} giorni</p>
                 </div>
                 <div>
@@ -177,10 +177,10 @@ export function PreventivoDetail({ preventivo }: { preventivo: PreventivoDetailD
                         {riga.mezzo?.nome || riga.descrizione || "Servizio"}
                       </p>
                       <p className="text-xs text-secondary">
-                        {riga.mezzo?.codiceInterno && <span>{riga.mezzo.codiceInterno} \u00b7 </span>}
-                        Qt\u00e0: {riga.quantita} \u00d7 {formatEuro(riga.prezzo)}
-                        {riga.dal && ` \u00b7 ${formatDate(riga.dal)}`}
-                        {riga.al && ` \u2192 ${formatDate(riga.al)}`}
+                        {riga.mezzo?.codiceInterno && <span>{riga.mezzo.codiceInterno} · </span>}
+                        Qtà: {riga.quantita} × {formatEuro(riga.prezzo)}
+                        {riga.dal && ` · ${formatDate(riga.dal)}`}
+                        {riga.al && ` → ${formatDate(riga.al)}`}
                       </p>
                     </div>
                     <p className="text-sm font-medium tabular-nums">{formatEuro(riga.prezzo * riga.quantita)}</p>

@@ -59,7 +59,7 @@ export function MezziList({ mezzi, categorie }: { mezzi: MezzoData[]; categorie:
   })
 
   async function handleDelete(id: string, nome: string) {
-    if (!confirm(`Eliminare "${nome}"? Verr\u00e0 rimosso anche dai preventivi.`)) return
+    if (!confirm(`Eliminare "${nome}"? Verrà rimosso anche dai preventivi.`)) return
     setDeleting(id)
     try {
       const { deleteMezzo } = await import("@/lib/actions/mezzi")

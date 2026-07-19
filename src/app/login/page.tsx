@@ -23,7 +23,7 @@ const features = [
 ]
 
 const guide = [
-  { titolo: "Dashboard", descrizione: "Panoramica completa con KPI, grafici e attivit\u00e0 recenti." },
+  { titolo: "Dashboard", descrizione: "Panoramica completa con KPI, grafici e attività recenti." },
   { titolo: "Clienti", descrizione: "Anagrafica clienti con ricerca, filtri e storico noleggi." },
   { titolo: "Mezzi", descrizione: "Catalogo mezzi con stato, ubicazione e tariffe." },
   { titolo: "Preventivi", descrizione: "Crea preventivi con righe, calcolo automatico IVA e sconto." },
@@ -163,7 +163,7 @@ export default function LoginPage() {
                   <Input
                     id="password"
                     type="password"
-                    placeholder="\u2022\u2022\u2022\u2022\u2022\u2022\u2022\u2022"
+                    placeholder="••••••••"
                     value={password}
                     onChange={(e) => setPassword(e.target.value)}
                     required
@@ -203,12 +203,12 @@ export default function LoginPage() {
               Guida al sistema
             </div>
             <p className="text-xs text-secondary">
-              Scopri come usare tutte le funzionalit\u00e0 del sistema
+              Scopri come usare tutte le funzionalità del sistema
             </p>
           </Link>
 
           <div className="space-y-2">
-            <h3 className="text-[10px] sm:text-xs font-semibold text-secondary uppercase tracking-wider text-center">Funzionalit\u00e0 principali</h3>
+            <h3 className="text-[10px] sm:text-xs font-semibold text-secondary uppercase tracking-wider text-center">Funzionalità principali</h3>
             <div className="grid grid-cols-2 sm:grid-cols-3 gap-1.5 sm:gap-2">
               {guide.map((g) => (
                 <div key={g.titolo} className="bg-white rounded-lg border border-border/50 p-3">

@@ -285,7 +285,7 @@ export function NoleggioDetail({ noleggio }: { noleggio: NoleggioDetailData }) {
           {noleggio.modalitaConsegna && (
             <Card className="border-l-4 border-l-green-500">
               <CardHeader className="pb-3">
-                <CardTitle className="text-base">Modalit\u00e0 consegna</CardTitle>
+                <CardTitle className="text-base">Modalità consegna</CardTitle>
               </CardHeader>
               <CardContent>
                 <p className="text-sm">{noleggio.modalitaConsegna}</p>

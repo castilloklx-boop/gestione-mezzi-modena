@@ -158,7 +158,7 @@ export default function IstruzioniPage() {
           <div className="bg-gradient-to-r from-blue-600 to-blue-700 rounded-2xl p-6 sm:p-10 text-white text-center">
           <h2 className="text-2xl font-bold mb-3">Pronto per iniziare?</h2>
           <p className="text-blue-100 mb-6 max-w-md mx-auto">
-            Accedi con le credenziali demo per esplorare il sistema con dati di esempio gi\u00e0 pronti.
+            Accedi con le credenziali demo per esplorare il sistema con dati di esempio già pronti.
           </p>
           <div className="inline-flex items-center gap-3 bg-white/10 backdrop-blur-sm rounded-lg px-5 py-3 text-sm">
             <span className="text-blue-100">Email:</span>
@@ -213,7 +213,7 @@ export default function IstruzioniPage() {
             <div className="p-4 bg-green-50 rounded-lg border border-green-200 md:col-span-2">
               <p className="text-sm font-semibold text-green-800 mb-2">5. Deploy!</p>
               <p className="text-xs text-green-700">
-                Pusha su GitHub e Vercel fa il deploy automatico. Il progetto ha gi\u00e0 <code className="text-xs bg-slate-100 px-1 rounded">vercel.json</code> con il comando di build corretto. Il codice rileva automaticamente PostgreSQL vs SQLite in base a DATABASE_URL.
+                Pusha su GitHub e Vercel fa il deploy automatico. Il progetto ha già <code className="text-xs bg-slate-100 px-1 rounded">vercel.json</code> con il comando di build corretto. Il codice rileva automaticamente PostgreSQL vs SQLite in base a DATABASE_URL.
               </p>
             </div>
           </div>
