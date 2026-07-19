@@ -1,5 +1,4 @@
 import "dotenv/config"
-import { PrismaBetterSqlite3 } from "@prisma/adapter-better-sqlite3"
 import { PrismaClient } from "@/generated/prisma/client"
 
 const globalForPrisma = globalThis as unknown as {
@@ -14,11 +13,13 @@ function createPrismaClient() {
     const { PrismaPg } = require("@prisma/adapter-pg")
     // eslint-disable-next-line @typescript-eslint/no-require-imports
     const { Pool } = require("pg")
-    const pool = new Pool({ connectionString: dbUrl })
+    const pool = new Pool({ connectionString: dbUrl, max: 5 })
     const adapter = new PrismaPg(pool)
     return new PrismaClient({ adapter })
   }
 
+  // eslint-disable-next-line @typescript-eslint/no-require-imports
+  const { PrismaBetterSqlite3 } = require("@prisma/adapter-better-sqlite3")
   const adapter = new PrismaBetterSqlite3({ url: dbUrl })
   return new PrismaClient({ adapter })
 }
