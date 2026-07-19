@@ -6,7 +6,7 @@ const globalForPrisma = globalThis as unknown as {
 }
 
 function createPrismaClient() {
-  const dbUrl = process.env.DATABASE_URL || "file:./dev.db"
+  const dbUrl = process.env.DATABASE_URL || ""
 
   if (dbUrl.startsWith("postgres")) {
     // eslint-disable-next-line @typescript-eslint/no-require-imports
@@ -18,10 +18,17 @@ function createPrismaClient() {
     return new PrismaClient({ adapter })
   }
 
-  // eslint-disable-next-line @typescript-eslint/no-require-imports
-  const { PrismaBetterSqlite3 } = require("@prisma/adapter-better-sqlite3")
-  const adapter = new PrismaBetterSqlite3({ url: dbUrl })
-  return new PrismaClient({ adapter })
+  try {
+    // eslint-disable-next-line @typescript-eslint/no-require-imports
+    const { PrismaBetterSqlite3 } = require("@prisma/adapter-better-sqlite3")
+    const adapter = new PrismaBetterSqlite3({ url: dbUrl || "file:./dev.db" })
+    return new PrismaClient({ adapter })
+  } catch {
+    throw new Error(
+      "DATABASE_URL non configurata. Imposta DATABASE_URL nel file .env " +
+      "(locale: file:./dev.db) o nelle variabili d'ambiente Vercel (PostgreSQL)."
+    )
+  }
 }
 
 export const prisma = globalForPrisma.prisma ?? createPrismaClient()
