@@ -1,0 +1,206 @@
+generator client {
+  provider = "prisma-client"
+  output = "../src/generated/prisma"
+}
+
+datasource db {
+  provider = "sqlite"
+}
+
+model User {
+  id            String   @id @default(cuid())
+  name          String?
+  email         String   @unique
+  password      String
+  image         String?
+  emailVerified DateTime?
+  createdAt     DateTime @default(now())
+  updatedAt     DateTime @updatedAt
+  accounts      Account[]
+  sessions      Session[]
+}
+
+model Account {
+  id                String  @id @default(cuid())
+  userId            String
+  type              String
+  provider          String
+  providerAccountId String
+  refresh_token     String?
+  access_token      String?
+  expires_at        Int?
+  token_type        String?
+  scope             String?
+  id_token          String?
+  session_state     String?
+  user              User    @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  @@unique([provider, providerAccountId])
+  @@map("accounts")
+}
+
+model Session {
+  id           String   @id @default(cuid())
+  sessionToken String   @unique
+  userId       String
+  expires      DateTime
+  user         User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+}
+
+model VerificationToken {
+  identifier String
+  token      String   @unique
+  expires    DateTime
+  @@unique([identifier, token])
+}
+
+model Cliente {
+  id              String      @id @default(cuid())
+  nome            String
+  tipo            String      @default("privato")
+  partitaIva      String?
+  codiceFiscale   String?
+  referente       String?
+  email           String?
+  telefono        String?
+  indirizzo       String?
+  citta           String?
+  cap             String?
+  provincia       String?
+  note            String?
+  attivo          Boolean     @default(true)
+  createdAt       DateTime    @default(now())
+  updatedAt       DateTime    @updatedAt
+  preventivi      Preventivo[]
+  noleggi         Noleggio[]
+}
+
+model Categoria {
+  id     String @id @default(cuid())
+  nome   String @unique
+  mezzi  Mezzo[]
+}
+
+model Mezzo {
+  id                  String       @id @default(cuid())
+  codiceInterno       String       @unique
+  nome                String
+  categoriaId         String
+  marca               String?
+  modello             String?
+  matricola           String?
+  descrizione         String?
+  tariffaGiornaliera  Float
+  tariffaSettimanale  Float?
+  depositoCauzionale  Float        @default(0)
+  ubicazione          String?
+  stato               String       @default("disponibile")
+  dataUltimaManutenzione DateTime?
+  dataProssimaManutenzione DateTime?
+  note                String?
+  createdAt           DateTime     @default(now())
+  updatedAt           DateTime     @updatedAt
+  categoria           Categoria    @relation(fields: [categoriaId], references: [id])
+  manutenzioni        Manutenzione[]
+  noleggioMezzi       NoleggioMezzo[]
+  preventivoRighe     PreventivoRiga[]
+}
+
+model Preventivo {
+  id            String                @id @default(cuid())
+  numero        Int                   @default(0)
+  clienteId     String
+  dataCreazione DateTime              @default(now())
+  validita      Int                   @default(30)
+  sconto        Float                 @default(0)
+  iva           Float                 @default(22)
+  deposito      Float                 @default(0)
+  note          String?
+  stato         String                @default("bozza")
+  createdAt     DateTime              @default(now())
+  updatedAt     DateTime              @updatedAt
+  cliente       Cliente               @relation(fields: [clienteId], references: [id])
+  righe         PreventivoRiga[]
+  noleggi       Noleggio[]
+}
+
+model PreventivoRiga {
+  id           String     @id @default(cuid())
+  preventivoId String
+  mezzoId      String?
+  descrizione  String?
+  quantita     Int        @default(1)
+  prezzo       Float      @default(0)
+  dal          DateTime?
+  al           DateTime?
+  createdAt    DateTime   @default(now())
+  preventivo   Preventivo @relation(fields: [preventivoId], references: [id], onDelete: Cascade)
+  mezzo        Mezzo?     @relation(fields: [mezzoId], references: [id])
+}
+
+model Noleggio {
+  id                    String         @id @default(cuid())
+  numero                Int            @default(0)
+  preventivoId          String?
+  clienteId             String
+  dataInizio            DateTime
+  dataRestituzionePrev  DateTime
+  dataRestituzioneEff   DateTime?
+  luogoConsegna         String?
+  modalitaConsegna      String?
+  referente             String?
+  importo               Float          @default(0)
+  deposito              Float          @default(0)
+  statoPagamento        String         @default("da_pagare")
+  stato                 String         @default("programmato")
+  noteConsegna          String?
+  noteRestituzione      String?
+  createdAt             DateTime       @default(now())
+  updatedAt             DateTime       @updatedAt
+  cliente               Cliente        @relation(fields: [clienteId], references: [id])
+  preventivo            Preventivo?    @relation(fields: [preventivoId], references: [id])
+  mezzi                 NoleggioMezzo[]
+}
+
+model NoleggioMezzo {
+  id         String   @id @default(cuid())
+  noleggioId String
+  mezzoId    String
+  createdAt  DateTime @default(now())
+  noleggio   Noleggio @relation(fields: [noleggioId], references: [id], onDelete: Cascade)
+  mezzo      Mezzo    @relation(fields: [mezzoId], references: [id])
+
+  @@unique([noleggioId, mezzoId])
+}
+
+model Manutenzione {
+  id            String    @id @default(cuid())
+  mezzoId       String
+  tipo          String
+  dataPrevista  DateTime
+  dataEseguita  DateTime?
+  costo         Float?
+  fornitore     String?
+  descrizione   String?
+  stato         String    @default("programmata")
+  note          String?
+  createdAt     DateTime  @default(now())
+  updatedAt     DateTime  @updatedAt
+  mezzo         Mezzo     @relation(fields: [mezzoId], references: [id])
+}
+
+model Impostazioni {
+  id              String  @id @default("default")
+  ragioneSociale  String  @default("La Mia Azienda")
+  logo            String?
+  partitaIva      String?
+  indirizzo       String?
+  telefono        String?
+  email           String?
+  aliquotaIva     Float   @default(22)
+  condizioniNoleggio String?
+  prefissoDocumenti String @default("DOC")
+  progressivoFattura Int  @default(1)
+  progressivoPreventivo Int @default(1)
+  progressivoNoleggio Int @default(1)
+}
