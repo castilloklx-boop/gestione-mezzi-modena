@@ -50,7 +50,8 @@ export function Sidebar() {
         {!collapsed && (
           <Link href="/" className="text-lg font-semibold text-primary flex items-center gap-2">
             <Truck className="h-5 w-5" />
-            <span>GMM</span>
+              <span>GMM</span>
+              <span className="text-[10px] text-secondary ml-auto">Demo</span>
           </Link>
         )}
         {collapsed && (

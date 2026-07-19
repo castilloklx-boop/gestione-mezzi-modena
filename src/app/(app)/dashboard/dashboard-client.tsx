@@ -48,7 +48,10 @@ export function DashboardClient({ data }: { data: DashboardData }) {
       <div className="flex items-center justify-between gap-3 flex-wrap">
         <div className="min-w-0">
           <h2 className="text-base sm:text-lg font-semibold text-foreground truncate">Buongiorno, Amministratore</h2>
-          <p className="text-xs sm:text-sm text-secondary truncate">{today}</p>
+          <div className="flex items-center gap-2">
+            <p className="text-xs sm:text-sm text-secondary truncate">{today}</p>
+            <span className="text-[10px] sm:text-xs bg-amber-100 text-amber-700 px-1.5 py-0.5 rounded-full font-medium">Progetto Dimostrativo</span>
+          </div>
         </div>
         <Link href="/noleggi/nuovo" className="shrink-0">
           <Button size="sm" className="sm:h-9">

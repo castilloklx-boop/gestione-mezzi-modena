@@ -10,8 +10,8 @@ const inter = Inter({
 })
 
 export const metadata: Metadata = {
-  title: "Gestione Mezzi Modena",
-  description: "Sistema di gestione per noleggio mezzi e attrezzature",
+  title: "Progetto Dimostrativo - Gestione Mezzi",
+  description: "Sistema di gestione per noleggio mezzi e attrezzature - Progetto Dimostrativo",
 }
 
 export default function RootLayout({
